@@ -1,0 +1,932 @@
+{
+  "schemaVersion": 1,
+  "objects": [
+    {
+      "id": "beer",
+      "displayName": "Beer",
+      "category": "beer-related",
+      "tags": ["beer-related", "classic-tailgate"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.15 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 8,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": true,
+        "canDropFromAbove": false,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "beerEmergency": { "eligible": true, "role": "star" },
+        "miniMatt": { "eligible": true },
+        "nothingEvent": { "eligible": true, "role": "decoy" }
+      },
+      "jokePoolRef": "beer",
+      "weight": 1.0,
+      "isMattRig": false
+    },
+    {
+      "id": "brat",
+      "displayName": "Bratwurst",
+      "category": "tailgate-food",
+      "tags": ["tailgate-food", "grill", "classic-tailgate"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.18 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 6,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {},
+      "jokePoolRef": "brat",
+      "weight": 1.0,
+      "isMattRig": false
+    },
+    {
+      "id": "cheese-curds",
+      "displayName": "Cheese Curds",
+      "category": "tailgate-food",
+      "tags": ["tailgate-food", "wisconsin", "snack"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.1 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 6,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": true,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {},
+      "jokePoolRef": "cheese-curds",
+      "weight": 0.8,
+      "isMattRig": false
+    },
+    {
+      "id": "football",
+      "displayName": "Football",
+      "category": "sports-fan-gear",
+      "tags": ["sports-fan-gear", "classic-tailgate", "game-day"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.28 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 5,
+        "canBeGiant": true,
+        "canFlyIn": true,
+        "canRollIn": true,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "miniMatt": { "eligible": true },
+        "ramageception": { "eligible": true, "role": "decoy" }
+      },
+      "jokePoolRef": "football",
+      "weight": 1.0,
+      "isMattRig": false
+    },
+    {
+      "id": "pigeon",
+      "displayName": "Pigeon",
+      "category": "wildlife",
+      "tags": ["wildlife", "chaos", "classic-tailgate"],
+      "scale": { "sizeClass": "character", "defaultHeightM": 0.3 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 6,
+        "canBeGiant": true,
+        "canFlyIn": true,
+        "canRollIn": false,
+        "canDropFromAbove": false,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": false
+      },
+      "specialEventAffinities": {
+        "giantPigeon": { "eligible": true, "role": "star" }
+      },
+      "jokePoolRef": "pigeon",
+      "weight": 1.0,
+      "isMattRig": false
+    },
+    {
+      "id": "porta-potty",
+      "displayName": "Porta-Potty",
+      "category": "tailgate-fixture",
+      "tags": ["tailgate-fixture", "bathroom", "classic-tailgate"],
+      "scale": { "sizeClass": "large", "defaultHeightM": 2.3 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": false,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": false,
+        "canOrbit": false,
+        "canInvadeCamera": false,
+        "requiresFlatSurface": true,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "beerEmergency": { "eligible": true, "role": "decoy" }
+      },
+      "jokePoolRef": "porta-potty",
+      "weight": 1.0,
+      "isMattRig": false
+    },
+    {
+      "id": "cooler",
+      "displayName": "Cooler",
+      "category": "tailgate-gear",
+      "tags": ["tailgate-gear", "beer-related", "classic-tailgate"],
+      "scale": { "sizeClass": "medium", "defaultHeightM": 0.5 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 4,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": true,
+        "canDropFromAbove": false,
+        "canOrbit": false,
+        "canInvadeCamera": false,
+        "requiresFlatSurface": true,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "beerEmergency": { "eligible": true, "role": "any" },
+        "miniMatt": { "eligible": true }
+      },
+      "jokePoolRef": "cooler",
+      "weight": 1.0,
+      "isMattRig": false
+    },
+    {
+      "id": "lawn-chair",
+      "displayName": "Lawn Chair",
+      "category": "tailgate-gear",
+      "tags": ["tailgate-gear", "seating", "classic-tailgate"],
+      "scale": { "sizeClass": "medium", "defaultHeightM": 0.85 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 4,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": false,
+        "canOrbit": false,
+        "canInvadeCamera": false,
+        "requiresFlatSurface": true,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {},
+      "jokePoolRef": "lawn-chair",
+      "weight": 0.8,
+      "isMattRig": false
+    },
+    {
+      "id": "grill",
+      "displayName": "Grill",
+      "category": "tailgate-fixture",
+      "tags": ["tailgate-fixture", "cooking", "classic-tailgate"],
+      "scale": { "sizeClass": "medium", "defaultHeightM": 1.0 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": false,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": false,
+        "canOrbit": false,
+        "canInvadeCamera": false,
+        "requiresFlatSurface": true,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {},
+      "jokePoolRef": "grill",
+      "weight": 0.9,
+      "isMattRig": false
+    },
+    {
+      "id": "foam-finger",
+      "displayName": "Foam Finger",
+      "category": "sports-fan-gear",
+      "tags": ["sports-fan-gear", "game-day", "classic-tailgate"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.6 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 6,
+        "canBeGiant": true,
+        "canFlyIn": true,
+        "canRollIn": false,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": false
+      },
+      "specialEventAffinities": {
+        "ramageception": { "eligible": true, "role": "decoy" }
+      },
+      "jokePoolRef": "foam-finger",
+      "weight": 0.9,
+      "isMattRig": false
+    },
+    {
+      "id": "cheesehead",
+      "displayName": "Cheesehead",
+      "category": "sports-fan-gear",
+      "tags": ["sports-fan-gear", "wisconsin", "game-day"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.35 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 5,
+        "canBeGiant": true,
+        "canFlyIn": true,
+        "canRollIn": false,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": false
+      },
+      "specialEventAffinities": {},
+      "jokePoolRef": "cheesehead",
+      "weight": 0.9,
+      "isMattRig": false
+    },
+    {
+      "id": "nachos",
+      "displayName": "Nachos",
+      "category": "tailgate-food",
+      "tags": ["tailgate-food", "snack", "messy"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.12 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 5,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": true,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {},
+      "jokePoolRef": "nachos",
+      "weight": 0.8,
+      "isMattRig": false
+    },
+    {
+      "id": "giant-pretzel",
+      "displayName": "Giant Pretzel",
+      "category": "tailgate-food",
+      "tags": ["tailgate-food", "novelty", "oversized"],
+      "scale": { "sizeClass": "medium", "defaultHeightM": 0.55 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": false,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": false,
+        "canOrbit": false,
+        "canInvadeCamera": false,
+        "requiresFlatSurface": true,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {},
+      "jokePoolRef": "giant-pretzel",
+      "weight": 0.6,
+      "isMattRig": false
+    },
+    {
+      "id": "parking-cone",
+      "displayName": "Parking Cone",
+      "category": "tailgate-fixture",
+      "tags": ["tailgate-fixture", "hazard", "classic-tailgate"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.45 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 8,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": true,
+        "canDropFromAbove": true,
+        "canOrbit": false,
+        "canInvadeCamera": false,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "nothingEvent": { "eligible": true, "role": "decoy" }
+      },
+      "jokePoolRef": "parking-cone",
+      "weight": 0.7,
+      "isMattRig": false
+    },
+    {
+      "id": "tv-football",
+      "displayName": "TV Showing Football",
+      "category": "tailgate-gear",
+      "tags": ["tailgate-gear", "game-day", "electronics"],
+      "scale": { "sizeClass": "medium", "defaultHeightM": 0.7 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": false,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": false,
+        "canOrbit": false,
+        "canInvadeCamera": false,
+        "requiresFlatSurface": true,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "ramageception": { "eligible": true, "role": "decoy" }
+      },
+      "jokePoolRef": "tv-football",
+      "weight": 0.6,
+      "isMattRig": false
+    },
+    {
+      "id": "empty-beer-case",
+      "displayName": "Empty Beer Case",
+      "category": "beer-related",
+      "tags": ["beer-related", "empty", "classic-tailgate"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.3 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 6,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": true,
+        "canOrbit": false,
+        "canInvadeCamera": false,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "beerEmergency": { "eligible": true, "role": "trigger" },
+        "nothingEvent": { "eligible": true, "role": "decoy" }
+      },
+      "jokePoolRef": "empty-beer-case",
+      "weight": 0.7,
+      "isMattRig": false
+    },
+    {
+      "id": "rival-fan",
+      "displayName": "Rival Fan",
+      "category": "people",
+      "tags": ["people", "rivalry", "game-day"],
+      "scale": { "sizeClass": "character", "defaultHeightM": 1.75 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": false,
+        "canBeGiant": false,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": false,
+        "canOrbit": false,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "beerEmergency": { "eligible": true, "role": "decoy" },
+        "ramageception": { "eligible": true, "role": "decoy" }
+      },
+      "jokePoolRef": "rival-fan",
+      "weight": 0.5,
+      "isMattRig": false
+    },
+    {
+      "id": "hot-dog",
+      "displayName": "Hot Dog",
+      "category": "tailgate-food",
+      "tags": ["tailgate-food", "grill", "classic-tailgate"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.15 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 6,
+        "canBeGiant": true,
+        "canFlyIn": true,
+        "canRollIn": true,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {},
+      "jokePoolRef": "hot-dog",
+      "weight": 0.9,
+      "isMattRig": false
+    },
+    {
+      "id": "sunglasses",
+      "displayName": "Sunglasses",
+      "category": "tailgate-gear",
+      "tags": ["tailgate-gear", "personal-item", "cool-guy"],
+      "scale": { "sizeClass": "tiny", "defaultHeightM": 0.05 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 4,
+        "canBeGiant": true,
+        "canFlyIn": true,
+        "canRollIn": false,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": false
+      },
+      "specialEventAffinities": {
+        "nothingEvent": { "eligible": true, "role": "decoy" },
+        "miniMatt": { "eligible": true }
+      },
+      "jokePoolRef": "sunglasses",
+      "weight": 0.7,
+      "isMattRig": false
+    },
+    {
+      "id": "microphone",
+      "displayName": "Microphone",
+      "category": "tailgate-gear",
+      "tags": ["tailgate-gear", "prop", "gag"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.25 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": false,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": false
+      },
+      "specialEventAffinities": {
+        "ramageception": { "eligible": true, "role": "decoy" }
+      },
+      "jokePoolRef": "microphone",
+      "weight": 0.6,
+      "isMattRig": false
+    },
+    {
+      "id": "tailgate-table",
+      "displayName": "Tailgate Table",
+      "category": "tailgate-fixture",
+      "tags": ["tailgate-fixture", "furniture", "classic-tailgate"],
+      "scale": { "sizeClass": "medium", "defaultHeightM": 0.75 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": false,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": false,
+        "canOrbit": false,
+        "canInvadeCamera": false,
+        "requiresFlatSurface": true,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "miniMatt": { "eligible": true }
+      },
+      "jokePoolRef": "tailgate-table",
+      "weight": 0.7,
+      "isMattRig": false
+    },
+    {
+      "id": "cardboard-box",
+      "displayName": "Mysterious Cardboard Box",
+      "category": "tailgate-gear",
+      "tags": ["suspicious", "mysterious", "tailgate-gear"],
+      "scale": { "sizeClass": "medium", "defaultHeightM": 0.45 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 4,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": true,
+        "canDropFromAbove": true,
+        "canOrbit": false,
+        "canInvadeCamera": false,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "nothingEvent": { "eligible": true, "role": "decoy" }
+      },
+      "jokePoolRef": "cardboard-box",
+      "weight": 0.6,
+      "isMattRig": false
+    },
+    {
+      "id": "trophy",
+      "displayName": "Trophy",
+      "category": "sports-fan-gear",
+      "tags": ["sports-fan-gear", "prize", "game-day"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.4 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": false,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": true,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "ramageception": { "eligible": true, "role": "decoy" }
+      },
+      "jokePoolRef": "trophy",
+      "weight": 0.6,
+      "isMattRig": false
+    },
+    {
+      "id": "inflatable-football",
+      "displayName": "Inflatable Football",
+      "category": "sports-fan-gear",
+      "tags": ["sports-fan-gear", "novelty", "oversized"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.9 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 4,
+        "canBeGiant": true,
+        "canFlyIn": true,
+        "canRollIn": true,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {},
+      "jokePoolRef": "inflatable-football",
+      "weight": 0.6,
+      "isMattRig": false
+    },
+    {
+      "id": "another-matt",
+      "displayName": "Another Matt",
+      "category": "matt-variant",
+      "tags": ["matt-variant", "chaos", "rage"],
+      "scale": { "sizeClass": "character", "defaultHeightM": 1.8 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": false,
+        "canBeGiant": false,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": false,
+        "canOrbit": false,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "ramageception": { "eligible": true, "role": "star" }
+      },
+      "jokePoolRef": "another-matt",
+      "weight": 0.4,
+      "isMattRig": true
+    },
+    {
+      "id": "tiny-matt",
+      "displayName": "Tiny Matt",
+      "category": "matt-variant",
+      "tags": ["matt-variant", "novelty", "tiny"],
+      "scale": { "sizeClass": "character", "defaultHeightM": 0.3 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": false,
+        "canBeGiant": false,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": false,
+        "canOrbit": false,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": true,
+        "requiresGroundSurface": false
+      },
+      "specialEventAffinities": {
+        "miniMatt": { "eligible": true, "role": "star" }
+      },
+      "jokePoolRef": "tiny-matt",
+      "weight": 0.4,
+      "isMattRig": true
+    },
+    {
+      "id": "random-sock",
+      "displayName": "Random Sock",
+      "category": "tailgate-gear",
+      "tags": ["tailgate-gear", "weird", "lost-and-found"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.1 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 5,
+        "canBeGiant": true,
+        "canFlyIn": true,
+        "canRollIn": false,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "nothingEvent": { "eligible": true, "role": "decoy" }
+      },
+      "jokePoolRef": "random-sock",
+      "weight": 0.5,
+      "isMattRig": false
+    },
+    {
+      "id": "pizza",
+      "displayName": "Pizza",
+      "category": "tailgate-food",
+      "tags": ["tailgate-food", "classic-tailgate", "shared"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.35 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 4,
+        "canBeGiant": true,
+        "canFlyIn": true,
+        "canRollIn": false,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {},
+      "jokePoolRef": "pizza",
+      "weight": 0.8,
+      "isMattRig": false
+    },
+    {
+      "id": "chicken-wings",
+      "displayName": "Chicken Wings",
+      "category": "tailgate-food",
+      "tags": ["tailgate-food", "messy", "classic-tailgate"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.15 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 6,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {},
+      "jokePoolRef": "chicken-wings",
+      "weight": 0.8,
+      "isMattRig": false
+    },
+    {
+      "id": "mustard-bottle",
+      "displayName": "Mustard Bottle",
+      "category": "tailgate-food",
+      "tags": ["tailgate-food", "condiment", "classic-tailgate"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.22 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 5,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": true,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "nothingEvent": { "eligible": true, "role": "decoy" }
+      },
+      "jokePoolRef": "mustard-bottle",
+      "weight": 0.6,
+      "isMattRig": false
+    },
+    {
+      "id": "grill-tongs",
+      "displayName": "Grill Tongs",
+      "category": "tailgate-gear",
+      "tags": ["tailgate-gear", "cooking", "classic-tailgate"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.35 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 4,
+        "canBeGiant": true,
+        "canFlyIn": true,
+        "canRollIn": false,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {},
+      "jokePoolRef": "grill-tongs",
+      "weight": 0.6,
+      "isMattRig": false
+    },
+    {
+      "id": "folding-chair",
+      "displayName": "Folding Chair",
+      "category": "tailgate-gear",
+      "tags": ["tailgate-gear", "seating", "classic-tailgate"],
+      "scale": { "sizeClass": "medium", "defaultHeightM": 0.9 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 4,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": false,
+        "canOrbit": false,
+        "canInvadeCamera": false,
+        "requiresFlatSurface": true,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {},
+      "jokePoolRef": "folding-chair",
+      "weight": 0.7,
+      "isMattRig": false
+    },
+    {
+      "id": "megaphone",
+      "displayName": "Megaphone",
+      "category": "sports-fan-gear",
+      "tags": ["sports-fan-gear", "loud", "game-day"],
+      "scale": { "sizeClass": "medium", "defaultHeightM": 0.4 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": false,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "ramageception": { "eligible": true, "role": "decoy" }
+      },
+      "jokePoolRef": "megaphone",
+      "weight": 0.6,
+      "isMattRig": false
+    },
+    {
+      "id": "garbage-can",
+      "displayName": "Garbage Can",
+      "category": "tailgate-fixture",
+      "tags": ["tailgate-fixture", "trash", "classic-tailgate"],
+      "scale": { "sizeClass": "medium", "defaultHeightM": 0.9 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 4,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": true,
+        "canDropFromAbove": false,
+        "canOrbit": false,
+        "canInvadeCamera": false,
+        "requiresFlatSurface": true,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {},
+      "jokePoolRef": "garbage-can",
+      "weight": 0.7,
+      "isMattRig": false
+    },
+    {
+      "id": "cornhole-bag",
+      "displayName": "Cornhole Bag",
+      "category": "tailgate-gear",
+      "tags": ["tailgate-gear", "game", "classic-tailgate"],
+      "scale": { "sizeClass": "small", "defaultHeightM": 0.15 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": true,
+        "maxDuplicates": 6,
+        "canBeGiant": true,
+        "canFlyIn": true,
+        "canRollIn": true,
+        "canDropFromAbove": true,
+        "canOrbit": true,
+        "canInvadeCamera": true,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {},
+      "jokePoolRef": "cornhole-bag",
+      "weight": 0.7,
+      "isMattRig": false
+    },
+    {
+      "id": "suspicious-cooler",
+      "displayName": "Suspicious Cooler",
+      "category": "tailgate-gear",
+      "tags": ["suspicious", "mysterious", "taped-shut", "humming"],
+      "scale": { "sizeClass": "medium", "defaultHeightM": 0.55 },
+      "placement": {
+        "canAppearBehindPlayer": true,
+        "canDuplicate": false,
+        "canBeGiant": true,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": false,
+        "canOrbit": false,
+        "canInvadeCamera": false,
+        "requiresFlatSurface": true,
+        "requiresGroundSurface": true
+      },
+      "specialEventAffinities": {
+        "beerEmergency": { "eligible": true, "role": "decoy" },
+        "nothingEvent": { "eligible": true, "role": "decoy" }
+      },
+      "jokePoolRef": "suspicious-cooler",
+      "weight": 0.5,
+      "isMattRig": false
+    },
+    {
+      "id": "nothing",
+      "displayName": "Nothing",
+      "category": "meta",
+      "tags": ["meta", "sentinel", "absence"],
+      "scale": { "sizeClass": "tiny", "defaultHeightM": 0.01 },
+      "placement": {
+        "canAppearBehindPlayer": false,
+        "canDuplicate": false,
+        "canBeGiant": false,
+        "canFlyIn": false,
+        "canRollIn": false,
+        "canDropFromAbove": false,
+        "canOrbit": false,
+        "canInvadeCamera": false,
+        "requiresFlatSurface": false,
+        "requiresGroundSurface": false
+      },
+      "specialEventAffinities": {
+        "nothingEvent": { "eligible": true, "role": "required" }
+      },
+      "jokePoolRef": "nothing",
+      "weight": 0,
+      "isMattRig": false
+    }
+  ]
+}
