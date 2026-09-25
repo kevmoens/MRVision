@@ -4,7 +4,9 @@ const DEG2RAD = Math.PI / 180;
 
 // Adapted from the classic three.js DeviceOrientationControls approach.
 const zee = new THREE.Vector3(0, 0, 1);
+const upAxis = new THREE.Vector3(0, 1, 0);
 const euler = new THREE.Euler();
+const baseEuler = new THREE.Euler();
 const q0 = new THREE.Quaternion();
 const q1 = new THREE.Quaternion(-Math.sqrt(0.5), 0, 0, Math.sqrt(0.5)); // -PI/2 around X
 
@@ -45,7 +47,16 @@ export function createTierB() {
     if (e.alpha == null) return;
     rawDeviceQuaternion(rawQuat, e.alpha, e.beta || 0, e.gamma || 0, currentScreenOrientationDeg());
     if (!baseQuatInverse) {
-      baseQuatInverse = rawQuat.clone().invert();
+      // Only baseline the heading (yaw), never pitch/roll -- beta/gamma are
+      // already gravity-relative (true level), so if we inverted the whole
+      // raw quaternion here, whatever tilt the phone happened to have at
+      // this exact instant (e.g. still angled down from tapping "start")
+      // would get permanently baked in as "level" for the rest of the
+      // session. Baselining yaw-only means "forward" is wherever the phone
+      // pointed at calibration, while "level" always stays true gravity
+      // level regardless of how the phone was held when this event fired.
+      baseEuler.setFromQuaternion(rawQuat, 'YXZ');
+      baseQuatInverse = new THREE.Quaternion().setFromAxisAngle(upAxis, baseEuler.y).invert();
     }
   }
 

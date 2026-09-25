@@ -92,7 +92,7 @@ export function createHud() {
     top.appendChild(card);
   }
 
-  function showResultHeadline(text) {
+  function showTransientHeadline(text) {
     clearZone(center);
     const card = document.createElement('div');
     card.className = 'wim-card';
@@ -100,50 +100,55 @@ export function createHud() {
     center.appendChild(card);
   }
 
-  function showResultBody(lines) {
-    clearZone(center);
-    const card = document.createElement('div');
-    card.className = 'wim-card';
-    card.innerHTML = lines.map((l) => `<div class="wim-body-line">${l}</div>`).join('');
-    center.appendChild(card);
+  // Renders a card into `zone` and returns a Promise that resolves only
+  // when the player taps the button -- no timer, so the player controls
+  // how long they spend reading. Self-clears the zone on tap so callers
+  // don't need a separate clear step.
+  function waitForTap(zone, innerHtml, buttonLabel) {
+    return new Promise((resolve) => {
+      clearZone(zone);
+      const card = document.createElement('div');
+      card.className = 'wim-card';
+      card.innerHTML = innerHtml;
+      const btn = document.createElement('button');
+      btn.className = 'wim-btn';
+      btn.textContent = buttonLabel;
+      btn.addEventListener('click', () => {
+        clearZone(zone);
+        resolve();
+      }, { once: true });
+      card.appendChild(btn);
+      zone.appendChild(card);
+    });
   }
 
-  function showFakeHint(text) {
-    clearZone(bottom);
-    const card = document.createElement('div');
-    card.className = 'wim-card';
-    card.innerHTML = `<div class="wim-fake-hint">${text}</div>`;
-    bottom.appendChild(card);
+  function showResultAndWait({ headline, lines }) {
+    const html = `
+      <div class="wim-headline">${headline}</div>
+      ${lines.map((l) => `<div class="wim-body-line">${l}</div>`).join('')}
+    `;
+    return waitForTap(center, html, 'TAP TO CONTINUE');
   }
 
-  function clearResult() {
-    clearZone(center);
-    clearZone(bottom);
+  function showFakeHintAndWait(text) {
+    return waitForTap(bottom, `<div class="wim-fake-hint">${text}</div>`, 'CONTINUE');
+  }
+
+  function clearRoundHeader() {
     clearZone(top);
   }
 
-  function showHalftime(scoreText) {
-    clearZone(center);
-    const card = document.createElement('div');
-    card.className = 'wim-card';
-    card.innerHTML = `
+  function showHalftimeAndWait(scoreText) {
+    const html = `
       <div class="wim-round-badge">HALFTIME REPORT</div>
       <div class="wim-headline">${scoreText}</div>
       <div class="wim-subtitle">Nobody has gotten it right. This is going about as expected.</div>
     `;
-    center.appendChild(card);
+    return waitForTap(center, html, 'CONTINUE');
   }
 
-  function clearHalftime() {
-    clearZone(center);
-  }
-
-  function showFinaleHeader(text) {
-    clearZone(top);
-    const card = document.createElement('div');
-    card.className = 'wim-card';
-    card.innerHTML = `<div class="wim-headline">${text}</div>`;
-    top.appendChild(card);
+  function showFinaleHeaderAndWait(text) {
+    return waitForTap(top, `<div class="wim-headline">${text}</div>`, 'CONTINUE');
   }
 
   function showEndScreen({ scoreText, verdictText, closingLine, shareDataUrl }) {
@@ -199,13 +204,12 @@ export function createHud() {
     showLoading,
     clearStart,
     showRoundHeader,
-    showResultHeadline,
-    showResultBody,
-    showFakeHint,
-    clearResult,
-    showHalftime,
-    clearHalftime,
-    showFinaleHeader,
+    showTransientHeadline,
+    showResultAndWait,
+    showFakeHintAndWait,
+    clearRoundHeader,
+    showHalftimeAndWait,
+    showFinaleHeaderAndWait,
     showEndScreen,
   };
 }

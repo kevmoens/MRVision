@@ -191,14 +191,14 @@ export function createRoundRunner({ worldRoot, camera, canvas, mattRig, hud, cap
 
     if (record.outcome === 'correct-then-invalidated') {
       const stage1 = content.drawCorrectStage1();
-      hud.showResultHeadline(stage1.text);
+      hud.showTransientHeadline(stage1.text);
       sfx.revealCorrectStage1();
       confetti.burst(worldPosOfObjectIdFn(setup.clueTarget.id));
       await delay(500);
       confetti.freeze();
       sfx.scratchStop();
       const stage2 = content.drawCorrectStage2();
-      hud.showResultHeadline(stage2.text);
+      hud.showTransientHeadline(stage2.text);
       await delay(700);
       confetti.clear();
     } else {
@@ -220,31 +220,28 @@ export function createRoundRunner({ worldRoot, camera, canvas, mattRig, hud, cap
     lines.push(setup.joke.text);
     if (setup.eventFlavor) lines.push(setup.eventFlavor.text);
 
-    hud.showResultHeadline(record.outcome === 'wrong' ? 'WRONG.' : 'WELL... YOU WERE.');
-    hud.showResultBody(lines);
-    await delay(2200);
+    await hud.showResultAndWait({
+      headline: record.outcome === 'wrong' ? 'WRONG.' : 'WELL... YOU WERE.',
+      lines,
+    });
 
     if (setup.fakeHint) {
-      hud.showFakeHint(setup.fakeHint.text);
-      await delay(1600);
+      await hud.showFakeHintAndWait(setup.fakeHint.text);
     }
-    hud.clearResult();
+    hud.clearRoundHeader();
   }
 
   async function runHalftime(gameSession) {
     const scoreText = gameSession.playerCount > 1 ? '0/5 PER PLAYER' : '0/5';
-    hud.showHalftime(scoreText);
     sfx.halftimeWhistle();
-    await delay(2600);
-    hud.clearHalftime();
+    await hud.showHalftimeAndWait(scoreText);
   }
 
   async function runFinale(gameSession) {
     sfx.finaleSting();
-    hud.showFinaleHeader('THE MATT RAMAGE SHOW');
     const finalPos = mattRig.root.getWorldPosition(new THREE.Vector3());
     mattRig.setGazeTargets({ headWorldPos: finalPos, leftEyeWorldPos: finalPos, rightEyeWorldPos: finalPos });
-    await delay(1600);
+    await hud.showFinaleHeaderAndWait('THE MATT RAMAGE SHOW');
 
     const verdictText = gameSession.playerCount > 1
       ? gameSession.content.drawMultiplayerVerdict().text
