@@ -7,7 +7,6 @@ import { sfx } from '../engine/audio.js';
 import { wrongTierForRoundIndex } from './selectRound.js';
 import { angularDist } from './placement.js';
 
-const ROUND_TIMEOUT_MS = 7500;
 // The camera sits at the player's eye height (see engine/sphericalPlacement.js);
 // elevationDeg here is the angle DOWN to Matt's root (his feet), not to his
 // face, since his rig is built feet-up from mattRoot's own origin -- a
@@ -19,27 +18,23 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function waitForPick(selectable, camera, canvas, timeoutMs) {
+// Waits indefinitely for the player to tap a valid item -- no auto-pick
+// timeout. The round holds here until there's real interaction.
+function waitForPick(selectable, camera, canvas) {
   return new Promise((resolve) => {
     let done = false;
-    function finish(instanceId, timedOut) {
+    function finish(instanceId) {
       if (done) return;
       done = true;
       canvas.removeEventListener('pointerdown', onPointerDown);
-      clearTimeout(timer);
-      resolve({ instanceId, timedOut });
+      resolve({ instanceId, timedOut: false });
     }
     function onPointerDown(e) {
       const { x, y } = screenToNDC(e.clientX, e.clientY, canvas);
       const id = selectable.pick(camera, x, y);
-      if (id) finish(id, false);
+      if (id) finish(id);
     }
     canvas.addEventListener('pointerdown', onPointerDown);
-    const timer = setTimeout(() => {
-      const ids = Array.from(selectable.entries.keys());
-      const randomId = ids.length ? ids[Math.floor(Math.random() * ids.length)] : null;
-      finish(randomId, true);
-    }, timeoutMs);
   });
 }
 
@@ -172,7 +167,7 @@ export function createRoundRunner({ worldRoot, camera, canvas, mattRig, hud, cap
       }, setup.midRoundRetarget.delaySec * 1000);
     }
 
-    const pickResult = await waitForPick(selectable, camera, canvas, ROUND_TIMEOUT_MS);
+    const pickResult = await waitForPick(selectable, camera, canvas);
     if (retargetTimer) clearTimeout(retargetTimer);
     sfx.tapSelect();
 

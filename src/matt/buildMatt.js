@@ -135,6 +135,10 @@ function buildEye(side) {
 // swapping AFFECTED_EYE to 'left', or set LAZY_EYE_DEG to 0 to disable.
 const AFFECTED_EYE = 'right';
 const LAZY_EYE_DEG = 16;
+// How far each eye can rotate from rest before clamping -- pushed well past
+// anatomically-realistic range so "his eyes are on two different objects"
+// actually reads at a glance instead of requiring a close look.
+const EYE_MAX_CONE_DEG = 58;
 const _lazyEyeOffset = new THREE.Quaternion().setFromAxisAngle(
   new THREE.Vector3(0, 1, 0),
   THREE.MathUtils.degToRad(LAZY_EYE_DEG)
@@ -181,7 +185,7 @@ function wireRig(root, { head, leftEye, rightEye, logoNotch, sunglasses }) {
 
   function updateLazyEye(node, worldTarget, restQuat, dt) {
     const desired = computeLocalAimQuaternion(node, worldTarget);
-    const maxRad = THREE.MathUtils.degToRad(38);
+    const maxRad = THREE.MathUtils.degToRad(EYE_MAX_CONE_DEG);
     const angle = restQuat.angleTo(desired);
     const clamped = angle > maxRad ? restQuat.clone().slerp(desired, maxRad / angle) : desired;
     lazyTracked.slerp(clamped, Math.min(1, 4.0 * dt));
@@ -192,11 +196,11 @@ function wireRig(root, { head, leftEye, rightEye, logoNotch, sunglasses }) {
     if (state.headTarget) updateAim(head, state.headTarget, restHeadQuat, 75, 1.6, dt);
     if (state.leftEyeTarget) {
       if (AFFECTED_EYE === 'left') updateLazyEye(leftEye, state.leftEyeTarget, restLeftQuat, dt);
-      else updateAim(leftEye, state.leftEyeTarget, restLeftQuat, 38, 4.0, dt);
+      else updateAim(leftEye, state.leftEyeTarget, restLeftQuat, EYE_MAX_CONE_DEG, 4.0, dt);
     }
     if (state.rightEyeTarget) {
       if (AFFECTED_EYE === 'right') updateLazyEye(rightEye, state.rightEyeTarget, restRightQuat, dt);
-      else updateAim(rightEye, state.rightEyeTarget, restRightQuat, 38, 4.0, dt);
+      else updateAim(rightEye, state.rightEyeTarget, restRightQuat, EYE_MAX_CONE_DEG, 4.0, dt);
     }
     if (state.clueTarget && logoNotch) updateLogoNotch(logoNotch, state.clueTarget, dt);
   }
