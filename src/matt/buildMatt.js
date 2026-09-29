@@ -131,18 +131,22 @@ function buildEye(side) {
 
 // Matt has a real, permanent lazy eye (strabismus) -- his RIGHT eye (the one
 // on screen-left when he's facing you) never quite converges on what he's
-// looking at, drifting outward by a fixed angle instead. Flip which eye by
-// swapping AFFECTED_EYE to 'left', or set LAZY_EYE_DEG to 0 to disable.
+// looking at. Instead of a fixed outward offset, it continuously wanders in
+// a small circle around the "tracked" direction and never settles -- flip
+// which eye by swapping AFFECTED_EYE to 'left', or set LAZY_EYE_DEG to 0 to
+// disable (the circle animation itself only applies its rotation when
+// LAZY_EYE_DEG is non-zero, since the radius scales with it).
 const AFFECTED_EYE = 'right';
 const LAZY_EYE_DEG = 16;
+const LAZY_CIRCLE_SPEED = 1.1; // rad/sec -- one full wander loop roughly every 5.7s
 // How far each eye can rotate from rest before clamping -- pushed well past
 // anatomically-realistic range so "his eyes are on two different objects"
 // actually reads at a glance instead of requiring a close look.
 const EYE_MAX_CONE_DEG = 58;
-const _lazyEyeOffset = new THREE.Quaternion().setFromAxisAngle(
-  new THREE.Vector3(0, 1, 0),
-  THREE.MathUtils.degToRad(LAZY_EYE_DEG)
-);
+// Head stays mostly facing the player -- the eyes (wide cone above) carry
+// almost all of "he's looking at something over there" so his face, and
+// critically the lazy eye, stay visible instead of turning into profile.
+const HEAD_MAX_CONE_DEG = 22;
 
 /**
  * Wraps a rig's named nodes (head/eyes/logoNotch/sunglasses, wherever they
@@ -161,6 +165,7 @@ function wireRig(root, { head, leftEye, rightEye, logoNotch, sunglasses }) {
   // start point next frame), the offset would compound frame over frame into
   // runaway spin instead of a fixed misalignment.
   const lazyTracked = (AFFECTED_EYE === 'right' ? restRightQuat : restLeftQuat).clone();
+  let lazyCirclePhase = Math.random() * Math.PI * 2; // random start so multiple Matts don't wander in lockstep
 
   const state = {
     headTarget: null,
@@ -189,11 +194,19 @@ function wireRig(root, { head, leftEye, rightEye, logoNotch, sunglasses }) {
     const angle = restQuat.angleTo(desired);
     const clamped = angle > maxRad ? restQuat.clone().slerp(desired, maxRad / angle) : desired;
     lazyTracked.slerp(clamped, Math.min(1, 4.0 * dt));
-    node.quaternion.copy(lazyTracked).multiply(_lazyEyeOffset);
+
+    // the eye never actually settles -- it keeps tracing a small circle
+    // around whatever direction lazyTracked drifted to, forever.
+    lazyCirclePhase += LAZY_CIRCLE_SPEED * dt;
+    const circleRad = THREE.MathUtils.degToRad(LAZY_EYE_DEG);
+    const wander = new THREE.Quaternion().setFromEuler(
+      new THREE.Euler(Math.sin(lazyCirclePhase) * circleRad, Math.cos(lazyCirclePhase) * circleRad, 0, 'XYZ')
+    );
+    node.quaternion.copy(lazyTracked).multiply(wander);
   }
 
   function update(dt) {
-    if (state.headTarget) updateAim(head, state.headTarget, restHeadQuat, 75, 1.6, dt);
+    if (state.headTarget) updateAim(head, state.headTarget, restHeadQuat, HEAD_MAX_CONE_DEG, 1.6, dt);
     if (state.leftEyeTarget) {
       if (AFFECTED_EYE === 'left') updateLazyEye(leftEye, state.leftEyeTarget, restLeftQuat, dt);
       else updateAim(leftEye, state.leftEyeTarget, restLeftQuat, EYE_MAX_CONE_DEG, 4.0, dt);
