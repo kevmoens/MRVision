@@ -3,12 +3,21 @@ export function angularDist(a, b) {
   return d > 180 ? 360 - d : d;
 }
 
-function randomAzimuthAvoiding(usedAzimuths, minSeparation = 25) {
+// Regular objects live in the frontal arc between the player and Matt (who
+// sits at azimuth 0 -- see roundRunner.js's MATT_START_SPHERICAL), not
+// scattered anywhere around a full circle. Glancing at any candidate object
+// this way never means turning your back on Matt, so his eyes/gaze stay
+// visible right alongside whatever you're comparing them to. The "behind
+// you" round type is a deliberate, separate exception (see
+// punchlineMustBePlaceableBehindPlayer below) and is untouched by this.
+const FRONTAL_HALF_ARC_DEG = 70;
+
+function randomAzimuthAvoiding(usedAzimuths, minSeparation = 18) {
   for (let i = 0; i < 20; i++) {
-    const az = Math.random() * 360 - 180;
+    const az = Math.random() * (2 * FRONTAL_HALF_ARC_DEG) - FRONTAL_HALF_ARC_DEG;
     if (usedAzimuths.every((u) => angularDist(u, az) > minSeparation)) return az;
   }
-  return Math.random() * 360 - 180;
+  return Math.random() * (2 * FRONTAL_HALF_ARC_DEG) - FRONTAL_HALF_ARC_DEG;
 }
 
 /**
@@ -25,10 +34,12 @@ export function computePlacements({ roundTypeDef, pool, punchlineTarget, duplica
   let counter = 0;
 
   function addInstance(objectDef, sphericalOverride, extra = {}) {
+    // distanceM stays under Matt's own 2.3m so objects sit between the
+    // player and Matt, not past him.
     const spherical = sphericalOverride || {
       azimuthDeg: randomAzimuthAvoiding(usedAz),
       elevationDeg: -5 + Math.random() * 15,
-      distanceM: 1.4 + Math.random() * 1.6,
+      distanceM: 1.2 + Math.random() * 0.9,
     };
     usedAz.push(spherical.azimuthDeg);
     const instance = {
